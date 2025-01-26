@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const PROTO_PATH = __dirname + '/search.proto';
 
+// Load and parse the protobuf definition
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,
   longs: String,
@@ -14,14 +15,13 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 const searchProto = grpc.loadPackageDefinition(packageDefinition).SearchService;
 
+// MongoDB connection
 mongoose
-  .connect('mongodb+srv://nahakrajesh3:nahakrajesh3@rjsnhk.ejhqj.mongodb.net/speakxquestion', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect('mongodb+srv://nahakrajesh3:nahakrajesh3@rjsnhk.ejhqj.mongodb.net/speakxquestion')
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection failed:', err));
 
+// Define the Question model
 const Question = mongoose.model(
   'Question',
   new mongoose.Schema({
@@ -34,15 +34,15 @@ const Question = mongoose.model(
   })
 );
 
+// gRPC service function for searching questions
 async function search(call, callback) {
-  const { query, type } = call.request;  
+  const { query, type } = call.request;
 
   try {
-    
     const filter = { title: new RegExp(query, 'i') };
-    
+
     if (type) {
-      filter.type = type;  
+      filter.type = type;
     }
 
     const questions = await Question.find(filter);
@@ -53,11 +53,11 @@ async function search(call, callback) {
   }
 }
 
-
-
+// Setup the gRPC server
 const server = new grpc.Server();
 server.addService(searchProto.service, { search });
 
+// Bind the server to the specified port
 server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), (err, port) => {
   if (err) {
     console.error('Server startup error:', err);
