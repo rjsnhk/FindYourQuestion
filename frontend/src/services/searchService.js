@@ -1,14 +1,10 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3001';
-axios.defaults.withCredentials = true;
-
-export const searchQuestions = async (query) => {
+export const searchQuestions = async (query, type) => {
   try {
-    const response = await axios.post('/api/search', { query });
-    return response.data.questions || [];
+    const response = await axios.post('/api/search', { query, type });  // Send query and type to backend
+    return response.data.questions;
   } catch (error) {
-    console.error('Failed to fetch questions:', error.message);
-    throw new Error('Could not fetch questions.');
+    throw new Error('Error searching questions: ' + error.message);
   }
 };

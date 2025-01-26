@@ -1,18 +1,55 @@
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-/* App Container */
 .App {
   font-family: 'Poppins', sans-serif;
   text-align: center;
   margin-top: 50px;
-  background-color: #fff5e6; /* Soft orange background */
+  background-color: #fff5e6;
   min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
+  color: #333;
 }
 
-/* Search Box and Button */
+/* Filter Container */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+label {
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+
+select {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus {
+  border-color: #ff5805;
+  box-shadow: 0 0 5px rgba(255, 88, 5, 0.5);
+}
+
+/* Error Message */
+.error-message {
+  color: #ff5805;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+/* Search Box Container */
 .search-container {
   display: flex;
   justify-content: center;
@@ -20,6 +57,7 @@
   gap: 10px;
 }
 
+/* Input Field */
 input[type="text"] {
   width: 300px;
   padding: 10px;
@@ -36,6 +74,7 @@ input[type="text"]:focus {
   box-shadow: 0 0 5px rgba(255, 88, 5, 0.5);
 }
 
+/* Button */
 button {
   padding: 10px 20px;
   font-size: 16px;
@@ -53,7 +92,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* Question List Styling */
+/* List Styling */
 ul {
   list-style-type: none;
   padding: 0;
@@ -73,7 +112,7 @@ li {
 
 li:hover {
   transform: scale(1.05);
-  background-color: #ffe8d5; /* Faded orange */
+  background-color: #ffe8d5;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -91,7 +130,131 @@ p {
   color: #666;
   font-weight: 400;
 }
-.error-message {
-  color: red;
-  font-weight: bold;
+
+/* Media Queries for Responsiveness */
+
+/* Mobile Devices */
+@media (max-width: 600px) {
+  .App {
+    padding: 15px;
+  }
+
+  .search-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  input[type="text"], button {
+    width: 100%;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  label {
+    font-size: 16px;
+  }
+
+  select {
+    width: 100%;
+  }
+
+  ul {
+    padding: 0 10px;
+  }
+
+  li {
+    margin: 10px 0;
+    padding: 15px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
+
+/* Tablet Devices */
+@media (min-width: 601px) and (max-width: 768px) {
+  .App {
+    padding: 20px;
+  }
+
+  .search-container {
+    gap: 15px;
+  }
+
+  input[type="text"], button {
+    width: 250px;
+  }
+
+  .filter-container {
+    gap: 15px;
+  }
+
+  select {
+    width: 250px;
+  }
+
+  ul {
+    padding: 0 15px;
+  }
+
+  li {
+    margin: 15px 0;
+    padding: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 15px;
+  }
+}
+
+/* Laptop and Desktop Devices */
+@media (min-width: 769px) {
+  .App {
+    padding: 20px;
+  }
+
+  .search-container {
+    gap: 20px;
+  }
+
+  input[type="text"], button {
+    width: 300px;
+  }
+
+  .filter-container {
+    gap: 20px;
+  }
+
+  select {
+    width: 250px;
+  }
+
+  ul {
+    padding: 0 20px;
+  }
+
+  li {
+    margin: 15px 0;
+    padding: 25px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 16px;
+  }
 }

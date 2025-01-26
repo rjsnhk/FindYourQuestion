@@ -35,15 +35,25 @@ const Question = mongoose.model(
 );
 
 async function search(call, callback) {
-  const { query } = call.request;
+  const { query, type } = call.request;  
+
   try {
-    const questions = await Question.find({ title: new RegExp(query, 'i') });
+    
+    const filter = { title: new RegExp(query, 'i') };
+    
+    if (type) {
+      filter.type = type;  
+    }
+
+    const questions = await Question.find(filter);
     callback(null, { questions });
   } catch (err) {
-    console.error('Search error:', err);
+    console.error('Error searching questions:', err);
     callback(err, null);
   }
 }
+
+
 
 const server = new grpc.Server();
 server.addService(searchProto.service, { search });
