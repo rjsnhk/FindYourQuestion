@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
+const port = process.env.PORT || 4000;
 
 const PROTO_PATH = __dirname + '/search.proto';
 
@@ -33,6 +34,7 @@ app.post('/api/search', (req, res) => {
   });
 });
 
-app.listen(process.env.PORT || 3001, '0.0.0.0', () => {
-  console.log(`Server running at http://0.0.0.0:${process.env.PORT || 3001}`);
-});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
