@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "starts": "node src/server.js",
-  "startp": "node src/proxyserver.js",
-  "load-data": "node src/loadData.js"
-},
-
+    "starts": "node src/server.js",
+    "startp": "node src/proxyserver.js",
+    "insertdb": "node src/insertDb.js",
+    "startall": "concurrently \"npm run starts\" \"npm run startp\""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,5 +19,8 @@
     "express": "^4.21.2",
     "express-http-proxy": "^2.1.1",
     "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
