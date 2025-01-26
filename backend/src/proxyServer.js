@@ -33,4 +33,5 @@ app.post('/api/search', (req, res) => {
   });
 });
 
-app.listen(3001, () => console.log('Server running at http://localhost:3001'));
+app.listen(process.env.PORT || 3001, () => console.log(`Server running at http://localhost:${process.env.PORT || 3001}`));
+
